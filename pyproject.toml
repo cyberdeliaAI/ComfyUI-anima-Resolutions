@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-anima-resolutions"
+description = "Anima-friendly first-pass resolution picker for ComfyUI. Outputs resolution, width, and height integers for image generation workflows."
+version = "1.0.0"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/cyberdeliaAI/ComfyUI-anima-Resolutions"
+
+[tool.comfy]
+PublisherId = "cyberdelia"
+DisplayName = "Anima Resolutions"
+Icon = "https://raw.githubusercontent.com/cyberdeliaAI/ComfyUI-anima-Resolutions/main/assets/icon.png"
