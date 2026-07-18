@@ -1,15 +1,31 @@
 # Anima Resolutions
 
-A small ComfyUI custom node for choosing Anima-friendly first-pass image sizes. It outputs the selected `resolution`, `width`, and `height` as integers so you can wire them into your workflow.
+A small ComfyUI custom node pack for choosing Anima-friendly first-pass image sizes, aligning Impact Pack detailer crops, and scaling images to dimensions that are divisible by a selected multiple.
 
-This plugin is only a resolution picker. It does not load a model, change sampler settings, generate images, or upscale by itself.
+It does not load a model, change sampler settings, or generate images.
 
 ## Features
 
-- **Three Resolution Presets**: 1024, 1280, and 1536
-- **Dynamic Ratio Selection**: choose from multiple aspect ratios per preset
-- **Common Aspect Ratios**: 1:1, 16:9, 9:16, 21:9, 4:3, 3:2, and more
-- **Three Integer Outputs**: `resolution`, `width`, and `height`
+- **Anima Resolutions**: select a first-pass size and output `resolution`, `width`, and `height` integers
+- **Anima Detailer Align Hook**: round Impact Pack detailer sampling sizes up to a multiple, with 32 as the default
+- **Anima Image Scale By Multiple**: resize an image and snap both dimensions to a multiple
+- **Native Resize Methods**: nearest-exact, bilinear, area, bicubic, and true Lanczos through ComfyUI
+
+## Nodes
+
+### Anima Resolutions
+
+Choose from 1024, 1280, and 1536 resolution presets with common square, portrait, landscape, and cinematic aspect ratios. This node only outputs integers and does not resize an image.
+
+### Anima Detailer Align Hook
+
+Connect `detailer_hook` to the matching input on an Impact Pack detailer node, such as Detailer For Each. The hook rounds the detailer's crop sampling width and height up to the selected alignment. Use `32` for Anima.
+
+This node requires [ComfyUI Impact Pack](https://github.com/ltdrdata/ComfyUI-Impact-Pack). The other nodes work without Impact Pack.
+
+### Anima Image Scale By Multiple
+
+Scale an `IMAGE` by a chosen factor while keeping the resulting width and height divisible by 8, 16, 32, or 64. The node also outputs the final `width`, `height`, and actual average `applied_scale`. Set `max_long_edge` to `0` for no limit.
 
 ## Recommended First-Pass Resolutions
 
@@ -24,7 +40,7 @@ For most Anima workflows, start around 1 to 1.6 megapixels for the first pass. H
 | 1536x1024 | wide landscape | 1.57 MP |
 | 1536x864 | cinematic wide | 1.33 MP |
 
-If your workflow uses an optional 1.5x upscale, the final image will be larger than the selected first-pass size. For example, `1024x1536` becomes `1536x2304` after a 1.5x upscale.
+If your workflow uses the optional 1.5x image scale, the final image will be larger than the selected first-pass size. For example, `1024x1536` becomes `1536x2304`. The scale node snaps the result to the selected multiple when necessary.
 
 ## Installation
 

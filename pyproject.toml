@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-anima-resolutions"
-description = "Anima-friendly first-pass resolution picker for ComfyUI. Outputs resolution, width, and height integers for image generation workflows."
-version = "1.0.0"
+description = "Resolution, 32-pixel alignment, and image-scaling utilities for Anima workflows in ComfyUI."
+version = "1.1.0"
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
 dependencies = []
